@@ -25,12 +25,15 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
-            Text('ICONO',
+            Image(
+              image: AssetImage('assets/images/LogoDark.png'),
+              width: 150,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 25),
+            Text('Cofrecito',
                 style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
-            SizedBox(height: 5),
-            Text('TITULO',
-                style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
-            SizedBox(height: 5),
+            SizedBox(height: 25),
             Text(
               'Descripcion de la app',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),

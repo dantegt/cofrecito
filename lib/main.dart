@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/pages.dart';
+import 'package:flutter_app/themes/default.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'COFRECITO',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      theme: DefaultTheme.defaultTheme , // tema personalizado ( Dark mode como default )
+      darkTheme: DefaultTheme.lightTheme,
       initialRoute: 'home',
       routes: {
         'home': (context) => const HomePage(),
