@@ -51,6 +51,17 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
               textAlign: TextAlign.center,
             ),
+            const Image(
+              image: AssetImage('assets/images/LogoDark.png'),
+              width: 150,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 25),
+            const Text(
+              'Descripcion de la app',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              textAlign: TextAlign.center,
+            ),
             Form(
                 key: _formKey,
                 child: Column(
