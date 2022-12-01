@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "921289581443",
+    "project_id": "tup-cofrecito",
+    "storage_bucket": "tup-cofrecito.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921289581443:android:124d99feb9b2292f5d4cb6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921289581443-fmmhbpui65q97gid17oet2ph19pmo37k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsehMkxDvY6Di09zbwShRielZf74nerm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921289581443-fmmhbpui65q97gid17oet2ph19pmo37k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
