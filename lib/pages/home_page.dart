@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/widgets.dart';
+import '../shared/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,17 +15,17 @@ class _HomePageState extends State<HomePage> {
   // and allows validation of the form.
 
   final _formKey = GlobalKey<FormState>();
-  String _server = 'LAS';
+  String _server = Constants.servers[0];
 
-  final _servers = ['LAS', 'LAN', 'NA', 'EUW', 'KR'];
+  final _servers = Constants.servers;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('COFRECITO',
-            style:
-                TextStyle(fontFamily: 'Beaufort', fontWeight: FontWeight.w800)),
+        title: Text(Constants.appName,
+            style: const TextStyle(
+                fontFamily: 'Beaufort', fontWeight: FontWeight.w800)),
         elevation: 10.0,
       ),
       drawer: const DrawerMenu(),
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                   constraints: const BoxConstraints(maxHeight: 180),
                   child: const FadeInImage(
                     image: AssetImage('assets/images/LogoDark.png'),
-                    placeholder: AssetImage('assets/images/background.png'),
+                    placeholder: AssetImage('assets/images/LogoLight.png'),
                   ))),
           const SizedBox(height: 40),
           const Padding(
