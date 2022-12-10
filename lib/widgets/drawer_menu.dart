@@ -26,6 +26,13 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           const Divider(height: 5),
+          ListTile(
+            title: const Text('Message'),
+            leading: const Icon(Icons.person),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'message');
+            },
+          ),
         ],
       ),
     );
