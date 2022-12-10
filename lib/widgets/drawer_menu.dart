@@ -18,6 +18,7 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           const Divider(height: 5),
+          const Divider(height: 5),
           ListTile(
             title: const Text('Champions'),
             leading: const Icon(Icons.person),
@@ -33,6 +34,7 @@ class DrawerMenu extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'message');
             },
           ),
+          const Divider(height: 5),
         ],
       ),
     );
