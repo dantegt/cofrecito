@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (context) => const HomePage(),
         'champions': (context) => const ChampionsListPage(),
+        'message':(context) => MessageScreen(),
       },
     );
   }

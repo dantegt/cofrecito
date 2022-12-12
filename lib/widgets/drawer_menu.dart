@@ -28,11 +28,20 @@ class _DrawerMenuState extends State<DrawerMenu> {
             },
           ),
           const Divider(height: 5),
+          const Divider(height: 5),
           ListTile(
             title: const Text('Champions'),
             leading: const Icon(Icons.person),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'champions');
+            },
+          ),
+          const Divider(height: 5),
+          ListTile(
+            title: const Text('Message'),
+            leading: const Icon(Icons.person),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'message');
             },
           ),
           const Divider(height: 5),
