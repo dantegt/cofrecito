@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
       initialRoute: 'home',
       routes: {
         'home': (context) => const HomePage(),
-        'champions': (context) => const ChampionsListPage(),
+        'champions': (context) => const ChampionsListPage(),  
+        'home_logged' : (context) => const HomeLogged()
       },
     );
   }
