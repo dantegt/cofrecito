@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/providers.dart';
+import 'package:flutter_app/shared/preferences.dart';
+import 'package:provider/provider.dart';
 
-class DrawerMenu extends StatelessWidget {
+class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
 
   @override
+  State<DrawerMenu> createState() => _DrawerMenuState();
+}
+
+class _DrawerMenuState extends State<DrawerMenu> {
+  @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<ThemeProvider>(context);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -26,6 +36,19 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           const Divider(height: 5),
+          Flexible(
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+            SwitchListTile.adaptive(
+                title: const Text('Dark Mode'),
+                value: Preferences.darkmode,
+                onChanged: (value) {
+                  setState(() {
+                    Preferences.darkmode = value;
+                    value ? currentTheme.setDark() : currentTheme.setLight();
+                  });
+                })
+          ]))
         ],
       ),
     );

@@ -11,9 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-
   final _formKey = GlobalKey<FormState>();
   String _server = Constants.servers[0];
 

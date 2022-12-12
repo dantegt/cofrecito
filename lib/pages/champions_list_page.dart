@@ -24,7 +24,7 @@ class ChampionsListPage extends StatelessWidget {
             var champions = json.decode(snapshot.data.toString());
 
             return ListView.builder(
-              // physics: const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return ChampionTile(
                   name: champions[index]['name'],
