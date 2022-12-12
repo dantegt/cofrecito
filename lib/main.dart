@@ -34,8 +34,9 @@ class MyApp extends StatelessWidget {
       initialRoute: 'home',
       routes: {
         'home': (context) => const HomePage(),
-        'champions': (context) => const ChampionsListPage(),
-        'message':(context) => MessageScreen(),
+        'champions': (context) => const ChampionsListPage(),  
+        'home_logged' : (context) => const HomeLogged(),
+        'message':(context) => MessageScreen()
       },
     );
   }

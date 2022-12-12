@@ -37,6 +37,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
             },
           ),
           const Divider(height: 5),
+           ListTile(
+            title: const Text('Home logged (TEST)'),
+            leading: const Icon(Icons.person),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'home_logged');
+            },
+          ),
           ListTile(
             title: const Text('Message'),
             leading: const Icon(Icons.person),
