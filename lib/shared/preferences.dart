@@ -4,7 +4,7 @@ class Preferences {
   static String _summoner = '';
   static String _server = '';
   static int _level = 0;
-  static bool _darkmode = false;
+  static bool _darkmode = true;
 
   static late SharedPreferences _prefs;
 
