@@ -1,19 +1,33 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import '../shared/constants.dart';
 
 class ChampionTile extends StatelessWidget {
-  const ChampionTile({super.key, this.name, this.champId, this.description});
+  ChampionTile({super.key, this.name, this.champId, this.description});
 
   final String? name;
   final String? champId;
   final String? description;
+  final mastery = _randomMastery();
+  final hasChest = _hasChest();
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(name ?? 'Champion name'),
-      leading: CircleAvatar(
-        backgroundImage: _getImage(champId),
+      title: Text(
+        name ?? 'Champion name',
+        style: const TextStyle(
+            fontSize: 18, fontFamily: 'Beaufort', fontWeight: FontWeight.w800),
+      ),
+      leading: Row(
+        children: [
+          CircleAvatar(backgroundImage: AssetImage(hasChest)),
+          const SizedBox(width: 5),
+          CircleAvatar(
+            backgroundImage: _getImage(champId),
+          ),
+        ],
       ),
       trailing: Wrap(
         children: [
@@ -22,7 +36,7 @@ class ChampionTile extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Text(
-                    '7',
+                    mastery,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
@@ -33,8 +47,8 @@ class ChampionTile extends StatelessWidget {
                         ..color = Colors.white,
                     ),
                   ),
-                  const Text('7',
-                      style: TextStyle(
+                  Text(mastery,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.normal,
                         fontFamily: 'Beaufort',
@@ -42,12 +56,15 @@ class ChampionTile extends StatelessWidget {
                       )),
                 ],
               )),
-          const SizedBox(width: 5),
-          const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/cofre-hextech.png')),
         ],
       ),
-      subtitle: Text(description ?? 'The champion description'),
+      subtitle: Text(description ?? 'The champion description',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            fontFamily: 'Beaufort',
+            color: Theme.of(context).backgroundColor,
+          )),
     );
   }
 }
@@ -56,4 +73,14 @@ _getImage(String? champId) {
   return champId == null
       ? Image.asset('assets/images/champion_512x512.jpg')
       : NetworkImage('${Constants.cdn}/champion/$champId/square');
+}
+
+_randomMastery() {
+  return Random().nextInt(8).toString();
+}
+
+_hasChest() {
+  return Random().nextBool()
+      ? 'assets/images/cofre-hextech.png'
+      : 'assets/images/no-cofre.jpg';
 }

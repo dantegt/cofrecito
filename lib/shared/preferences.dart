@@ -2,9 +2,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static String _summoner = '';
-  static String _server = '';
+  static String _server = 'LAS';
   static int _level = 0;
   static bool _darkmode = true;
+  static bool _isLogged = false;
 
   static late SharedPreferences _prefs;
 
@@ -29,6 +30,10 @@ class Preferences {
     return _prefs.getBool('_darkmode') ?? _darkmode;
   }
 
+  static bool get isLogged {
+    return _prefs.getBool('_isLogged') ?? _isLogged;
+  }
+
   // Setters
   static set summoner(String value) {
     _summoner = value;
@@ -48,5 +53,10 @@ class Preferences {
   static set darkmode(bool value) {
     _darkmode = value;
     _prefs.setBool('darkmode', value);
+  }
+
+  static set isLogged(bool value) {
+    _isLogged = value;
+    _prefs.setBool('isLogged', value);
   }
 }
