@@ -21,50 +21,52 @@ class _DrawerMenuState extends State<DrawerMenu> {
         children: [
           const _DrawerHeader(),
           ListTile(
-            title: const Text('Find Summoner'),
+            title: const Text('Buscar invocador'),
             leading: const Icon(Icons.search),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'home');
             },
           ),
           const Divider(height: 5),
-          const Divider(height: 5),
           ListTile(
-            title: const Text('Champions'),
-            leading: const Icon(Icons.person),
+            title: const Text('Campeones'),
+            leading: const Icon(Icons.bakery_dining_sharp),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'champions');
             },
           ),
           const Divider(height: 5),
-           ListTile(
-            title: const Text('Home logged (TEST)'),
+          ListTile(
+            title: const Text('Perfil'),
             leading: const Icon(Icons.person),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'home_logged');
             },
           ),
+          const Divider(height: 5),
           ListTile(
-            title: const Text('Message'),
-            leading: const Icon(Icons.person),
+            title: const Text('Reportar un Error'),
+            leading: const Icon(Icons.bug_report_sharp),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'message');
+              Navigator.pushReplacementNamed(context, 'support');
             },
           ),
           const Divider(height: 5),
-          Flexible(
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-            SwitchListTile.adaptive(
-                title: const Text('Dark Mode'),
-                value: Preferences.darkmode,
-                onChanged: (value) {
-                  setState(() {
-                    Preferences.darkmode = value;
-                    value ? currentTheme.setDark() : currentTheme.setLight();
-                  });
-                })
-          ]))
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SwitchListTile.adaptive(
+                  title: const Text('Dark mode'),
+                  value: Preferences.darkmode,
+                  onChanged: (value) {
+                    setState(() {
+                      Preferences.darkmode = value;
+                      value ? currentTheme.setDark() : currentTheme.setLight();
+                    });
+                  })
+            ],
+          )
         ],
       ),
     );

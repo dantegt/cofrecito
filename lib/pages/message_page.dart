@@ -14,15 +14,16 @@ class _MessageScreenState extends State<MessageScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  var dropdownvalue = 'What is your message about?';
+  var dropdownvalue = '¿De que se trata su consulta?';
   bool? _listTileCheckBox = false;
 
-  var items = [   
-    'What is your message about?',
-    'Level ',
-    'Champs',
-    'Chest info',
-    'About us',
+  var items = [
+    '¿De que se trata su consulta?',
+    'Cuenta',
+    'Campeones',
+    'Informacion sobre los cofres',
+    'Otros',
+    'Sobre nosotros',
   ];
 
   @override
@@ -40,12 +41,6 @@ class _MessageScreenState extends State<MessageScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children:[ 
-          const Padding(padding: EdgeInsets.all(10)),
-          Row(
-            children: [Padding(padding: EdgeInsets.only(left: 20),
-            child:  Text('Message Bearaldine', style: TextStyle(fontFamily: 'DMSans',fontSize: 20, color: Color.fromARGB(255, 217, 219, 209)))
-,)],
-    ),
             const Padding(padding: EdgeInsets.all(10)),
           Container(
             padding: const EdgeInsets.only(left: 9,top: 5, bottom: 6, right: 20),
@@ -68,7 +63,9 @@ class _MessageScreenState extends State<MessageScreen> {
               items: items.map((String items) {
                 return DropdownMenuItem(
                   value: items,
-                  child: Text(items, style: TextStyle(fontFamily: 'DMSans', color: Color.fromRGBO(42, 66, 82, 20) ),),
+                  child: Text(items, style: TextStyle(fontFamily: 'DMSans', color: items != '¿De que se trata su consulta?'
+                  ? Color.fromRGBO(174, 145, 75, 1) : Colors.black,)),
+                  enabled: items != '¿De que se trata su consulta?',
                 );
               }).toList(),
               onChanged: (String? newValue) {
@@ -93,8 +90,8 @@ class _MessageScreenState extends State<MessageScreen> {
                 width: 370,
                 height: 270,
                 padding: EdgeInsets.only(top: 5,left: 10),
-                child:  TextField(
-                  autofocus: true,
+                child:TextField(
+                  autofocus: false,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   textCapitalization: TextCapitalization.sentences,
@@ -103,12 +100,11 @@ class _MessageScreenState extends State<MessageScreen> {
                   cursorRadius: Radius.circular(200),
                   cursorWidth: 2.0,
                   textInputAction: TextInputAction.send,
-                  decoration: new InputDecoration.collapsed(hintText: 'Message', hintStyle: TextStyle(fontFamily: 'DMSans',fontSize: 16, fontWeight: FontWeight.w400,color: Color.fromRGBO(42, 66, 82, 20)))
-                  ),
-                ),
-                const Padding(padding: EdgeInsets.only(top: 200)),
+                  decoration: new InputDecoration.collapsed(hintText: 'Describe el paso a paso para\nreproducir el error.', hintStyle: TextStyle(fontFamily: 'DMSans',fontSize: 16, fontWeight: FontWeight.w400,color: Colors.black ))
+                  ),),
+                const Padding(padding: EdgeInsets.only(top: 240)),
                  Container(
-                  child: (CheckboxListTile(value: _listTileCheckBox, title: Text('Send me a copy to my email', style: TextStyle(fontFamily: 'DMSans')), onChanged:(value) {
+                  child: (CheckboxListTile(value: _listTileCheckBox, activeColor: Color.fromRGBO(174, 145, 75, 1), title: Text('Enviarme una copia a mi email', style: TextStyle(fontFamily: 'DMSans')), onChanged:(value) {
                 setState(() {
                   _listTileCheckBox = value;
                 });
@@ -116,6 +112,9 @@ class _MessageScreenState extends State<MessageScreen> {
               },
               controlAffinity: ListTileControlAffinity.leading,)),
               ),
+              Form(
+                key: _formKey,
+                child: 
                   Column(
                     children: <Widget>[
                       ElevatedButton(
@@ -127,7 +126,7 @@ class _MessageScreenState extends State<MessageScreen> {
                             bottomLeft: Radius.circular(13),
                             topLeft: Radius.circular(13)
                             )),
-                            backgroundColor: const Color.fromRGBO(42, 66, 82, 20),
+                            backgroundColor: const Color.fromRGBO(174, 145, 75, 1) ,
                             ),
                             onPressed: () {
                               // Validate returns true if the form is valid, or false otherwise.
@@ -136,15 +135,15 @@ class _MessageScreenState extends State<MessageScreen> {
                                 // you'd often call a server or save the information in a database.
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                      content: Text('Processing Data')),
+                                      content: Text('Enviando Mensaje')),
                                 );
                               }
                             },
-                            child: const Text('Send Message', style: TextStyle(fontFamily: 'DMSans',fontSize: 16,fontWeight: FontWeight.w700, color: Color.fromARGB(255, 217, 219, 209)),),
+                            child: const Text('Enviar Mensaje', style: TextStyle(fontFamily: 'DMSans',fontSize: 16,fontWeight: FontWeight.w700, color: Color.fromARGB(255, 217, 219, 209)),),
                           ),
                         ]
                         )
-      ],
+      )],
             ),
     ));
   }

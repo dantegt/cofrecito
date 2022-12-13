@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/home_logged.dart';
+import 'package:flutter_app/shared/preferences.dart';
 
 import '../widgets/widgets.dart';
 import '../shared/constants.dart';
@@ -12,9 +16,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
-  String _server = Constants.servers[0];
-
+  String _server = Preferences.server;
   final _servers = Constants.servers;
+  final TextEditingController _summonerController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +49,13 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
-                      fontFamily: 'Beaufort',
-                      color: Color.fromARGB(255, 217, 219, 209))))),
+                      fontFamily: 'Beaufort')))),
           const SizedBox(height: 5),
           const Padding(
             padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
             child: Text(
               'Confirma si tienes cofre disponible para tus partidas de ARAM.',
               style: TextStyle(
-                color: Color.fromARGB(255, 217, 219, 209),
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
               ),
@@ -77,16 +79,16 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Container(
                               padding: const EdgeInsets.only(left: 20, top: 2),
-                              decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 7, 13, 15),
-                                  borderRadius: BorderRadius.only(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).splashColor,
+                                  borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(40),
                                       bottomLeft: Radius.circular(40))),
                               height: 55,
                               width: 80,
                               child: DropdownButton(
                                   underline: const SizedBox(),
-                                  value: _server,
+                                  value: Preferences.server,
                                   icon: const Icon(Icons.keyboard_arrow_down),
                                   items: _servers.map((String server) {
                                     return DropdownMenuItem(
@@ -95,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                                   onChanged: (String? selected) {
                                     setState(() {
                                       _server = selected!;
+                                      Preferences.server = selected;
                                     });
                                   }),
                             ),
@@ -106,13 +109,21 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Container(
                               padding: const EdgeInsets.only(left: 5, top: 2),
-                              color: const Color.fromARGB(255, 7, 13, 15),
+                              color: Theme.of(context).splashColor,
                               height: 55,
                               width: 160,
                               child: TextFormField(
+                                controller: _summonerController,
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Summoner id'),
+                                    contentPadding: EdgeInsets.all(10),
+                                    hintText: 'Invocador'),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Falta invocador.';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -133,14 +144,29 @@ class _HomePageState extends State<HomePage> {
                                       const Color.fromRGBO(174, 145, 75, 1),
                                 ),
                                 onPressed: () {
-                                  // Validate returns true if the form is valid, or false otherwise.
                                   if (_formKey.currentState!.validate()) {
-                                    // If the form is valid, display a snackbar. In the real world,
-                                    // you'd often call a server or save the information in a database.
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text('Processing Data')),
+                                          content:
+                                              Text('Buscando invocador...')),
                                     );
+                                    setState(() {
+                                      Preferences.summoner =
+                                          _summonerController.text;
+                                      Preferences.level = _randomRank();
+                                      Preferences.icon = _randomIcon();
+                                      Preferences.isLogged = true;
+                                    });
+                                    Future.delayed(const Duration(seconds: 2),
+                                        () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const HomeLogged()));
+                                    });
                                   }
                                 },
                                 child: const Text('Submit'),
@@ -155,5 +181,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  _randomRank() {
+    return Random().nextInt(500);
+  }
+
+  _randomIcon() {
+    var num = Random().nextInt(99);
+    return 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/54$num.jpg';
   }
 }
