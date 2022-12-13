@@ -89,26 +89,29 @@ class HomeLogged extends StatelessWidget {
                           ),
                         ]),
                   ),
-                ),
-              ]),
-              const SizedBox(height: 60, width: double.infinity),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300, 50),
-                    backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
-                  ),
-                  onPressed: () {},
-                  child: const Text('Buscar')),
-              const SizedBox(height: 40, width: double.infinity),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300, 50),
-                    backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
-                  ),
-                  onPressed: () {},
-                  child: const Text('Lista de campeones'))
-            ],
-          ),
-        ));
+                ),        
+          ]),
+          const SizedBox(height: 60,width: double.infinity),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(300, 50),
+              backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
+            ),
+            onPressed: (){Navigator.pushReplacementNamed(context, 'home');},
+            child: const Text('Buscar')
+            ),
+          const SizedBox(height: 40,width: double.infinity),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(300, 50),
+              backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
+            ),
+            onPressed: (){Navigator.pushReplacementNamed(context, 'champions');},
+            child: const Text('Lista de campeones')
+            )
+          ],
+
+        ),
+      ));
   }
 }
