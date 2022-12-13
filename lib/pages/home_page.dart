@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/home_logged.dart';
 import 'package:flutter_app/shared/preferences.dart';
@@ -153,6 +155,8 @@ class _HomePageState extends State<HomePage> {
                                     setState(() {
                                       Preferences.summoner =
                                           _summonerController.text;
+                                      Preferences.level = _randomRank();
+                                      Preferences.icon = _randomIcon();
                                       Preferences.isLogged = true;
                                     });
                                     Future.delayed(const Duration(seconds: 2),
@@ -177,5 +181,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  _randomRank() {
+    return Random().nextInt(500);
+  }
+
+  _randomIcon() {
+    var num = Random().nextInt(99);
+    return 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/54$num.jpg';
   }
 }

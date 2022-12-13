@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Preferences {
   static String _summoner = '';
   static String _server = 'LAS';
+  static String _rank = '';
+  static String _icon = '';
   static int _level = 0;
   static bool _darkmode = true;
   static bool _isLogged = false;
@@ -20,6 +22,14 @@ class Preferences {
 
   static String get server {
     return _prefs.getString('_server') ?? _server;
+  }
+
+  static String get rank {
+    return _prefs.getString('_rank') ?? _rank;
+  }
+
+  static String get icon {
+    return _prefs.getString('_icon') ?? _icon;
   }
 
   static int get level {
@@ -43,6 +53,16 @@ class Preferences {
   static set server(String value) {
     _server = value;
     _prefs.setString('server', value);
+  }
+
+  static set rank(String value) {
+    _rank = value;
+    _prefs.setString('rank', value);
+  }
+
+  static set icon(String value) {
+    _icon = value;
+    _prefs.setString('icon', value);
   }
 
   static set level(int value) {
