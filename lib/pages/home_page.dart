@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/home_logged.dart';
 import 'package:flutter_app/shared/preferences.dart';
 
 import '../widgets/widgets.dart';
@@ -15,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
   String _server = Preferences.server;
   final _servers = Constants.servers;
+  final TextEditingController _summonerController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +111,17 @@ class _HomePageState extends State<HomePage> {
                               height: 55,
                               width: 160,
                               child: TextFormField(
+                                controller: _summonerController,
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.all(10),
                                     hintText: 'Invocador'),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Falta invocador.';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -134,12 +143,26 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           content:
                                               Text('Buscando invocador...')),
                                     );
-                                    Preferences.isLogged = true;
+                                    setState(() {
+                                      Preferences.summoner =
+                                          _summonerController.text;
+                                      Preferences.isLogged = true;
+                                    });
+                                    Future.delayed(const Duration(seconds: 2),
+                                        () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const HomeLogged()));
+                                    });
                                   }
                                 },
                                 child: const Text('Submit'),
