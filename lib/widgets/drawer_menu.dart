@@ -48,7 +48,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             title: const Text('Reportar un Error'),
             leading: const Icon(Icons.bug_report_sharp),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'message');
+              Navigator.pushReplacementNamed(context, 'support');
             },
           ),
           const Divider(height: 5),
