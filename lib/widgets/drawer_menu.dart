@@ -45,10 +45,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
             },
           ),
           ListTile(
-            title: const Text('Message'),
+            title: const Text('Support'),
             leading: const Icon(Icons.person),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'message');
+              Navigator.pushReplacementNamed(context, 'support');
             },
           ),
           const Divider(height: 5),
