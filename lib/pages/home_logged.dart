@@ -36,7 +36,7 @@ class HomeLogged extends StatelessWidget {
                     children:[
                     const ClipOval(
                       child: FadeInImage(
-                        image: NetworkImage('https://opgg-static.akamaized.net/images/profile_icons/profileIcon981.jpg?image=q_auto,f_png,w_auto&v=1670226786967'),
+                        image: AssetImage('assets/images/background.png'),
                         placeholder: AssetImage('assets/images/background.png'),
                         fit: BoxFit.fill,
                     ),),
@@ -92,7 +92,7 @@ class HomeLogged extends StatelessWidget {
               minimumSize: const Size(300, 50),
               backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
             ),
-            onPressed: (){},
+            onPressed: (){Navigator.pushReplacementNamed(context, 'home');},
             child: const Text('Buscar')
             ),
           const SizedBox(height: 40,width: double.infinity),
@@ -101,10 +101,9 @@ class HomeLogged extends StatelessWidget {
               minimumSize: const Size(300, 50),
               backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
             ),
-            onPressed: (){},
+            onPressed: (){Navigator.pushReplacementNamed(context, 'champions');},
             child: const Text('Lista de campeones')
             )
-          
           ],
 
         ),
