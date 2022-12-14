@@ -16,9 +16,9 @@ Aplicación movil desarrollada en Flutter que busca conectarse con el [API de Ri
   - Perfil (Inicio "Logged in")
   - Lista de Campeones
   - Formulario de Contacto / Reporte de errores
-- Implementación de SharedPreferences para almacenar localmente la información del Invocador
+- Implementación de [SharedPreferences](https://pub.dev/packages/shared_preferences) para almacenar localmente la información del Invocador
 - Widgets personalizados: ChampionTile, SummonerTile (Listado de Campeones)
-- FutureBuilder para obtener el listado de campeones desde un json local (champions.json)
+- FutureBuilder para obtener el listado de campeones desde un [json local (champions.json)](https://github.com/dantegt/cofrecito/blob/master/assets/json/champions.json)
 - Provider / Theme Switch para cambiar el tema desde el menu
 - Organizacion de recursos: Assets, Barrel files, Routes, Themes
 
