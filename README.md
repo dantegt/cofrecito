@@ -5,7 +5,7 @@ Gregori - Lagonegro - Pereyra
 
 ---
 
-## Mockup
+## Prototipo
 Aplicación movil desarrollada en Flutter que busca conectarse con el [API de Riot Games](https://developer.riotgames.com/) para proveer información de un Invocador:
 - Info del Invocador (Nombre, Nivel, Icono, Rango)
 - Disponibilidad de Cofre y Maestría con cada Campeón
