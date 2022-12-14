@@ -1,16 +1,31 @@
-# flutter_application
+# COFRECITO
 
-A new Flutter project.
+### TUP Laboratorio de Programación IV - 2022
+Gregori - Lagonegro - Pereyra
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Mockup
+Aplicación movil desarrollada en Flutter que busca conectarse con el [API de Riot Games](https://developer.riotgames.com/) para proveer información de un Invocador:
+- Info del Invocador (Nombre, Nivel, Icono, Rango)
+- Disponibilidad de Cofre y Maestría con cada Campeón
 
-A few resources to get you started if this is your first Flutter project:
+## Primera Entrega
+- Desarrollo de las pantallas principales
+  - Inicio (Buscador)
+  - Perfil (Inicio "Logged in")
+  - Lista de Campeones
+  - Formulario de Contacto / Reporte de errores
+- Implementación de SharedPreferences para almacenar localmente la información del Invocador
+- Widgets personalizados: ChampionTile, SummonerTile (Listado de Campeones)
+- FutureBuilder para obtener el listado de campeones desde un json local (champions.json)
+- Provider / Theme Switch para cambiar el tema desde el menu
+- Organizacion de recursos: Assets, Barrel files, Routes, Themes
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Probado en:
+- Pixel 3A - API 33 (Emulador)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## MVP: Objetivos
+- Conectar con API Riot: Buscar un Usuario, Obtener Maestrias
+- Implementar Firebase: Login de usuario, Formulario de Contacto
+- Implementar scroll rápido de Lista de Campeones por abecedario
