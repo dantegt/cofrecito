@@ -23,7 +23,8 @@ Aplicación movil desarrollada en Flutter que busca conectarse con el [API de Ri
 - Organizacion de recursos: Assets, Barrel files, Routes, Themes
 
 ## Probado en:
-- Pixel 3A - API 33 (Emulador)
+- Redmi Note 8 - API 28 - Android 9 Pie
+- Pixel 3A - API 33 - Android 13 Tiramisu (Emulador)
 
 ## MVP: Objetivos
 - Conectar con API Riot: Buscar un Usuario, Obtener Maestrias
