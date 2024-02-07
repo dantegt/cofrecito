@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/preferences.dart';
 
 import '../widgets/widgets.dart';
+import '../shared/constants.dart';
 
 class HomeLogged extends StatelessWidget {
   const HomeLogged({super.key});
@@ -10,6 +11,11 @@ class HomeLogged extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    String _summoner = Preferences.summoner;
+    String _summonerPuuid = Preferences.summonerPuuid;
+    int _level = Preferences.level;
+    String _icon = Preferences.icon.toString();
+    String _iconImageURL = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/$_icon.jpg';
 
     return Scaffold(
         appBar: AppBar(
@@ -29,11 +35,10 @@ class HomeLogged extends StatelessWidget {
                   width: (1 / 3 * width) - 25,
                   height: 140,
                   child: Stack(children: [
-                    const ClipOval(
+                    ClipOval(
                       child: FadeInImage(
-                        image: NetworkImage(
-                            'https://opgg-static.akamaized.net/images/profile_icons/profileIcon981.jpg?image=q_auto,f_png,w_auto&v=1670226786967'),
-                        placeholder: AssetImage('assets/images/background.png'),
+                        image: NetworkImage(_icon != '' ? _iconImageURL : Constants.fallbackIcon),
+                        placeholder: const AssetImage('assets/images/background.png'),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -48,8 +53,10 @@ class HomeLogged extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             color: Theme.of(context).backgroundColor,
                           ),
-                          child: const Text(
-                            "160",
+                          child: Text(
+                            _level == 0
+                                ? '0'
+                                : _level.toString(),
                             textAlign: TextAlign.center,
                           )),
                     ),
@@ -67,9 +74,9 @@ class HomeLogged extends StatelessWidget {
                           Container(
                             color: Colors.transparent,
                             child: Text(
-                              Preferences.summoner == ''
+                              _summoner == ''
                                   ? 'Invocador'
-                                  : Preferences.summoner,
+                                  : _summoner,
                               style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w800,
@@ -91,15 +98,6 @@ class HomeLogged extends StatelessWidget {
                   ),
                 ),        
           ]),
-          const SizedBox(height: 60,width: double.infinity),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(300, 50),
-              backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
-            ),
-            onPressed: (){Navigator.pushReplacementNamed(context, 'home');},
-            child: const Text('Buscar')
-            ),
           const SizedBox(height: 40,width: double.infinity),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -108,7 +106,16 @@ class HomeLogged extends StatelessWidget {
             ),
             onPressed: (){Navigator.pushReplacementNamed(context, 'champions');},
             child: const Text('Lista de campeones')
-            )
+            ),
+          const SizedBox(height: 60,width: double.infinity),
+              OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(300, 50),
+              foregroundColor: const Color.fromRGBO(174, 145, 75, 1),
+            ),
+            onPressed: (){Navigator.pushReplacementNamed(context, 'home');},
+            child: const Text('Buscar otro invocador')
+            ),
           ],
 
         ),

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../shared/constants.dart';
 
 class ChampionTile extends StatelessWidget {
-  ChampionTile({super.key, this.name, this.champId, this.description});
+  const ChampionTile({super.key, this.name, this.champId, this.description, this.mastery, this.chestGranted});
 
   final String? name;
   final String? champId;
   final String? description;
-  final mastery = _randomMastery();
-  final hasChest = _hasChest();
+  final String? mastery;
+  final bool? chestGranted;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ChampionTile extends StatelessWidget {
       ),
       leading: Wrap(
         children: [
-          CircleAvatar(backgroundImage: AssetImage(hasChest)),
+          CircleAvatar(backgroundImage: AssetImage(_hasChest(chestGranted))),
           const SizedBox(width: 5),
           CircleAvatar(
             backgroundImage: _getImage(champId),
@@ -46,7 +46,7 @@ class ChampionTile extends StatelessWidget {
                 Stack(
                   children: <Widget>[
                     Text(
-                      mastery,
+                      mastery!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.normal,
@@ -57,7 +57,8 @@ class ChampionTile extends StatelessWidget {
                           ..color = Colors.white,
                       ),
                     ),
-                    Text(mastery,
+                    Text(
+                        mastery!,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.normal,
@@ -69,9 +70,6 @@ class ChampionTile extends StatelessWidget {
               ],
             ),
           )
-          // CircleAvatar(
-          //     backgroundColor: Theme.of(context).primaryColor,
-          //     child: ),
         ],
       ),
       subtitle: Text(description ?? 'The champion description',
@@ -88,11 +86,7 @@ class ChampionTile extends StatelessWidget {
 _getImage(String? champId) {
   return champId == null
       ? Image.asset('assets/images/champion_512x512.jpg')
-      : NetworkImage('${Constants.cdn}/champion/$champId/square');
-}
-
-_randomMastery() {
-  return Random().nextInt(8).toString();
+      : NetworkImage('https://lolcito-express.onrender.com/api/v1/champion/icon/$champId');
 }
 
 _masteryIcon(mastery) {
@@ -120,8 +114,8 @@ _masteryIcon(mastery) {
   return 'https://raw.communitydragon.org/latest/game/assets/ux/mastery/mastery_icon_$value.png';
 }
 
-_hasChest() {
-  return Random().nextBool()
+_hasChest(chestGranted) {
+  return chestGranted
       ? 'assets/images/cofre-hextech.png'
       : 'assets/images/no-cofre.jpg';
 }

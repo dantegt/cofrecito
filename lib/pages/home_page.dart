@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/home_logged.dart';
@@ -17,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
   String _server = Preferences.server;
-  final _servers = Constants.servers;
+  final _servers = Constants.serversLabels;
   final TextEditingController _summonerController = TextEditingController();
 
   @override
@@ -90,9 +92,9 @@ class _HomePageState extends State<HomePage> {
                                   underline: const SizedBox(),
                                   value: Preferences.server,
                                   icon: const Icon(Icons.keyboard_arrow_down),
-                                  items: _servers.map((String server) {
+                                  items: _servers.map((Map<String, String> server) {
                                     return DropdownMenuItem(
-                                        value: server, child: Text(server));
+                                        value: server['server']!, child: Text(server['label']!));
                                   }).toList(),
                                   onChanged: (String? selected) {
                                     setState(() {
@@ -143,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                   backgroundColor:
                                       const Color.fromRGBO(174, 145, 75, 1),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
@@ -152,21 +154,32 @@ class _HomePageState extends State<HomePage> {
                                           content:
                                               Text('Buscando invocador...')),
                                     );
-                                    setState(() {
-                                      Preferences.summoner =
-                                          _summonerController.text;
-                                      Preferences.level = _randomRank();
-                                      Preferences.icon = _randomIcon();
-                                      Preferences.isLogged = true;
-                                    });
-                                    Future.delayed(const Duration(seconds: 2),
-                                        () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  const HomeLogged()));
-                                    });
+                                    var summonerData = await getSummonerFromAPI(_server, _summonerController.text);
+                                    if(summonerData.containsKey('status') && summonerData['status'] == 400) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                            Text('No se encontró el Invocador')),
+                                      );
+                                    } else {
+                                      setState(() {
+                                        Preferences.summoner = summonerData['name'];
+                                        Preferences.summonerPuuid = summonerData['puuid'];
+                                        Preferences.level = summonerData['summonerLevel'];
+                                        Preferences.icon = summonerData['profileIconId'];
+                                        Preferences.isLogged = true;
+                                      });
+
+                                      Future.delayed(const Duration(seconds: 2),
+                                          () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                const HomeLogged()));
+                                      });
+                                    }
+
                                   }
                                 },
                                 child: const Text('Submit'),
@@ -190,5 +203,13 @@ class _HomePageState extends State<HomePage> {
   _randomIcon() {
     var num = Random().nextInt(99);
     return 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/54$num.jpg';
+  }
+
+  getSummonerFromAPI(server, summoner) async {
+    var url = 'https://lolcito-express.onrender.com/api/v1/summoner/$server/$summoner';
+    var response = await http.get(Uri.parse(url));
+    var json = jsonDecode(response.body) as Map<String, dynamic>;
+    debugPrint('########### JSON: $json');
+    return json;
   }
 }

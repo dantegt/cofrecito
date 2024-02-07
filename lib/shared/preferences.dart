@@ -2,9 +2,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static String _summoner = '';
-  static String _server = 'LAS';
+  static String _summonerPuuid = '';
+  static String _server = 'la2';
   static String _rank = '';
-  static String _icon = '';
+  static int _icon = 23;
   static int _level = 0;
   static bool _darkmode = true;
   static bool _isLogged = false;
@@ -20,6 +21,10 @@ class Preferences {
     return _prefs.getString('_summoner') ?? _summoner;
   }
 
+  static String get summonerPuuid {
+    return _prefs.getString('_summonerPuuid') ?? _summonerPuuid;
+  }
+
   static String get server {
     return _prefs.getString('_server') ?? _server;
   }
@@ -28,8 +33,8 @@ class Preferences {
     return _prefs.getString('_rank') ?? _rank;
   }
 
-  static String get icon {
-    return _prefs.getString('_icon') ?? _icon;
+  static int get icon {
+    return _prefs.getInt('_icon') ?? _icon;
   }
 
   static int get level {
@@ -50,6 +55,11 @@ class Preferences {
     _prefs.setString('summoner', value);
   }
 
+  static set summonerPuuid(String value) {
+    _summonerPuuid = value;
+    _prefs.setString('summonerPuuid', value);
+  }
+
   static set server(String value) {
     _server = value;
     _prefs.setString('server', value);
@@ -60,9 +70,9 @@ class Preferences {
     _prefs.setString('rank', value);
   }
 
-  static set icon(String value) {
+  static set icon(int value) {
     _icon = value;
-    _prefs.setString('icon', value);
+    _prefs.setInt('icon', value);
   }
 
   static set level(int value) {
