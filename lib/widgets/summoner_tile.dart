@@ -35,10 +35,10 @@ class SummonerTile extends StatelessWidget {
       ),
       subtitle: Text(level == 0 ? 'Nivel ${_randomRank()}' : 'Nivel $level',
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: FontWeight.normal,
             fontFamily: 'Beaufort',
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).primaryColorLight,
           )),
     );
   }
