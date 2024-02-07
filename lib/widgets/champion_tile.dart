@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ChampionTile extends StatelessWidget {
   const ChampionTile({super.key, this.name, this.champId, this.description, this.mastery, this.chestGranted});
@@ -83,7 +84,7 @@ class ChampionTile extends StatelessWidget {
 _getImage(String? champId) {
   return champId == null
       ? Image.asset('assets/images/champion_512x512.jpg')
-      : NetworkImage('https://lolcito-express.onrender.com/api/v1/champion/icon/$champId');
+      : CachedNetworkImageProvider('https://lolcito-express.onrender.com/api/v1/champion/icon/$champId');
 }
 
 _masteryIcon(mastery) {

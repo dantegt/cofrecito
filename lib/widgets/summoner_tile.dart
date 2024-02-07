@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class SummonerTile extends StatelessWidget {
             fontSize: 18, fontFamily: 'Beaufort', fontWeight: FontWeight.w800),
       ),
       leading: CircleAvatar(
-          backgroundImage: NetworkImage(
+          backgroundImage: CachedNetworkImageProvider(
         icon == '' ? _randomIcon() : icon,
       )),
       trailing: Wrap(

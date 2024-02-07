@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/preferences.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../widgets/widgets.dart';
 import '../shared/constants.dart';
@@ -37,7 +38,7 @@ class HomeLogged extends StatelessWidget {
                   child: Stack(children: [
                     ClipOval(
                       child: FadeInImage(
-                        image: NetworkImage(_icon != '' ? _iconImageURL : Constants.fallbackIcon),
+                        image: CachedNetworkImageProvider(_icon != '' ? _iconImageURL : Constants.fallbackIcon),
                         placeholder: const AssetImage('assets/images/background.png'),
                         fit: BoxFit.fill,
                       ),
