@@ -196,15 +196,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _randomRank() {
-    return Random().nextInt(500);
-  }
-
-  _randomIcon() {
-    var num = Random().nextInt(99);
-    return 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/54$num.jpg';
-  }
-
   getSummonerFromAPI(server, summoner) async {
     var url = 'https://lolcito-express.onrender.com/api/v1/summoner/$server/$summoner';
     var response = await http.get(Uri.parse(url));
