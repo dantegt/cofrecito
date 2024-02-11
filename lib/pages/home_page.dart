@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -162,12 +161,21 @@ class _HomePageState extends State<HomePage> {
                                             Text('No se encontró el Invocador')),
                                       );
                                     } else {
+                                      var rankTier = 'UNRANKED';
+                                      if(summonerData['rank'].length > 0) {
+                                        var rank = summonerData['rank']['rank'];
+                                        var tier = summonerData['rank']['tier'];
+                                        rankTier = '$tier $rank';
+                                      }
+
                                       setState(() {
                                         Preferences.summoner = summonerData['name'];
                                         Preferences.summonerPuuid = summonerData['puuid'];
                                         Preferences.level = summonerData['summonerLevel'];
                                         Preferences.icon = summonerData['profileIconId'];
                                         Preferences.isLogged = true;
+                                        Preferences.rankedData = jsonEncode(summonerData['rank']);
+                                        Preferences.rank = rankTier;
                                       });
 
                                       Future.delayed(const Duration(seconds: 2),

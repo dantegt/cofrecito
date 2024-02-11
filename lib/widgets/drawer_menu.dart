@@ -14,6 +14,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
   @override
   Widget build(BuildContext context) {
     final currentTheme = Provider.of<ThemeProvider>(context);
+    final summonerLogged = Preferences.isLogged;
 
     return Drawer(
       child: ListView(
@@ -28,22 +29,24 @@ class _DrawerMenuState extends State<DrawerMenu> {
             },
           ),
           const Divider(height: 5),
-          ListTile(
-            title: const Text('Campeones'),
-            leading: const Icon(Icons.bakery_dining_sharp),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'champions');
-            },
-          ),
-          const Divider(height: 5),
-          ListTile(
-            title: const Text('Perfil'),
-            leading: const Icon(Icons.person),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'home_logged');
-            },
-          ),
-          const Divider(height: 5),
+          if(summonerLogged) ...[
+            ListTile(
+              title: const Text('Campeones'),
+              leading: const Icon(Icons.bakery_dining_sharp),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'champions');
+              },
+            ),
+            const Divider(height: 5),
+            ListTile(
+              title: const Text('Perfil'),
+              leading: const Icon(Icons.person),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'home_logged');
+              },
+            ),
+            const Divider(height: 5),
+          ],
           ListTile(
             title: const Text('Reportar un Error'),
             leading: const Icon(Icons.bug_report_sharp),

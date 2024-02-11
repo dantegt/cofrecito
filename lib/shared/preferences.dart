@@ -4,7 +4,10 @@ class Preferences {
   static String _summoner = '';
   static String _summonerPuuid = '';
   static String _server = 'la2';
+  static String _rankedData = '';
   static String _rank = '';
+  static int _wins = 0;
+  static int _losses = 0;
   static int _icon = 23;
   static int _level = 0;
   static bool _darkmode = true;
@@ -29,8 +32,20 @@ class Preferences {
     return _prefs.getString('_server') ?? _server;
   }
 
+  static String get rankedData {
+    return _prefs.getString('_rankedData') ?? _rankedData;
+  }
+
   static String get rank {
     return _prefs.getString('_rank') ?? _rank;
+  }
+
+  static int get wins {
+    return _prefs.getInt('_wins') ?? _wins;
+  }
+
+  static int get losses {
+    return _prefs.getInt('_losses') ?? _losses;
   }
 
   static int get icon {
@@ -68,6 +83,21 @@ class Preferences {
   static set rank(String value) {
     _rank = value;
     _prefs.setString('rank', value);
+  }
+
+  static set wins(int value) {
+    _wins = value;
+    _prefs.setInt('wins', value);
+  }
+
+  static set losses(int value) {
+    _losses = value;
+    _prefs.setInt('losses', value);
+  }
+
+  static set rankedData(String value) {
+    _rankedData = value;
+    _prefs.setString('rankedData', value);
   }
 
   static set icon(int value) {

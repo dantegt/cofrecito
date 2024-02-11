@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Preferences.isLogged ? 'home_logged' : 'home',
       routes: {
         'home': (context) => const HomePage(),
-        'champions': (context) => const ChampionsListPage(),
+        'champions': (context) => ChampionsListPage(),
         'home_logged': (context) => const HomeLogged(),
         'support': (context) => MessageScreen()
       },

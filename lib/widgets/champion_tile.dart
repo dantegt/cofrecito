@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_app/pages/champion_page.dart';
 
 class ChampionTile extends StatelessWidget {
-  const ChampionTile({super.key, this.name, this.champId, this.description, this.mastery, this.chestGranted});
+  const ChampionTile({super.key, this.name, this.champId, this.description, this.mastery, this.chestGranted, required this.champion});
 
   final String? name;
   final String? champId;
   final String? description;
   final String? mastery;
   final bool? chestGranted;
+  final Map<String, dynamic> champion;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,9 @@ class ChampionTile extends StatelessWidget {
         style: const TextStyle(
             fontSize: 18, fontFamily: 'Beaufort', fontWeight: FontWeight.w800),
       ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChampionPage(champion: champion)));
+      },
       leading: Wrap(
         children: [
           CircleAvatar(backgroundImage: AssetImage(_hasChest(chestGranted))),
@@ -29,8 +34,8 @@ class ChampionTile extends StatelessWidget {
       ),
       trailing: Wrap(
         children: [
-          Image.network(
-            _masteryIcon(mastery),
+          CachedNetworkImage(
+            imageUrl: _masteryIcon(mastery),
             width: 40,
             height: 40,
           ),

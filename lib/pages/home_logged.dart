@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/preferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,7 +18,16 @@ class HomeLogged extends StatelessWidget {
     String _summonerPuuid = Preferences.summonerPuuid;
     int _level = Preferences.level;
     String _icon = Preferences.icon.toString();
+    String _rank = Preferences.rank;
     String _iconImageURL = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/$_icon.jpg';
+
+    var rankedData = jsonDecode(Preferences.rankedData);
+
+    var rank = rankedData['tier'];
+    var division = rankedData['rank'];
+    var wins = rankedData['wins'];
+    var losses = rankedData['losses'];
+    var winRate = (wins + losses) > 0 ? (wins / (wins + losses) * 100).ceil() : 0;
 
     return Scaffold(
         appBar: AppBar(
@@ -64,8 +75,7 @@ class HomeLogged extends StatelessWidget {
                   ]),
                 ),
                 SizedBox(
-                  width: (2 / 3 * width) - 25,
-                  height: 120,
+                  width: 1000,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 40, vertical: 10),
@@ -87,14 +97,37 @@ class HomeLogged extends StatelessWidget {
                           const SizedBox(height: 5),
                           Container(
                             color: Colors.transparent,
-                            child: const Text(
-                              "Platino 4",
-                              style: TextStyle(
+                            child: Text(
+                              _rank == '' ?
+                              "UNRANKED"
+                              : _rank,
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
+                          CachedNetworkImage(
+                            imageUrl: _rankIcon(rank, division),
+                            width: 500,
+                            height: 80,
+                          ),
+                          if (rank != 'UNRANKED') Wrap(
+                            spacing: 20,
+                            children: [
+                            Column(children: [
+                              Text('$wins'),
+                              const Text('WINS'),
+                            ],),
+                            Column(children: [
+                              Text('$winRate%'),
+                              const Text('WIN RATE'),
+                            ],),
+                            Column(children: [
+                              Text('$losses'),
+                              const Text('LOSE'),
+                            ],),
+                          ],)
                         ]),
                   ),
                 ),        
@@ -106,8 +139,9 @@ class HomeLogged extends StatelessWidget {
               backgroundColor: const Color.fromRGBO(174, 145, 75, 1),
             ),
             onPressed: (){Navigator.pushReplacementNamed(context, 'champions');},
-            child: const Text('Lista de campeones')
+            child: const Text('VER MAESTRIAS')
             ),
+          const Expanded(child: Text('')),
           const SizedBox(height: 60,width: double.infinity),
               OutlinedButton(
             style: OutlinedButton.styleFrom(
@@ -121,5 +155,50 @@ class HomeLogged extends StatelessWidget {
 
         ),
       ));
+  }
+}
+
+refreshSummonerStats() async {
+  final server = Preferences.server;
+  final summoner = Preferences.summoner;
+  var url = 'https://lolcito-express.onrender.com/api/v1/summoner/$server/$summoner';
+  var response = await http.get(Uri.parse(url));
+  var json = jsonDecode(response.body) as Map<String, dynamic>;
+  debugPrint('########### JSON: $json');
+  return json;
+}
+
+_rankIcon(rankLabel, divisionLabel) {
+  final ranks = {
+    'IRON': '01_iron',
+    'BRONZE': '02_bronze',
+    'SILVER': '03_silver',
+    'GOLD': '04_gold',
+    'PLATINUM': '05_platinum',
+    'DIAMOND': '06_diamond',
+    'MASTER': '07_master',
+    'GRANDMASTER': '08_grandmaster',
+    'CHALLENGER': '09_challenger',
+    'EMERALD': 'emerald',
+  };
+
+  final divisions = {
+    'I': 'division1',
+    'II': 'division2',
+    'III': 'division3',
+    'IV': 'division4',
+  };
+
+  var rank = ranks[rankLabel];
+  var division = divisions[divisionLabel];
+
+  if(rankLabel == 'EMERALD') {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/05_platinum/05_platinum_division1.png';
+  } else if(rankLabel == 'MASTER' || rankLabel == 'GRANDMASTER' || rankLabel == 'CHALLENGER') {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/$rank/$rank''_division1.png';
+  } else if(rankLabel == 'UNRANKED') {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/01_iron/01_iron_division4.png';
+  } else {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/$rank/$rank''_$division.png';
   }
 }

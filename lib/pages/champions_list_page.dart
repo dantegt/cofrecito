@@ -7,7 +7,8 @@ import 'package:flutter_app/widgets/summoner_tile.dart';
 import '../widgets/widgets.dart';
 
 class ChampionsListPage extends StatelessWidget {
-  const ChampionsListPage({super.key});
+  ChampionsListPage({super.key});
+  final rankedData = jsonDecode(Preferences.rankedData);
 
   Future fetchMasteries() async {
     final server = Preferences.server;
@@ -42,7 +43,7 @@ class ChampionsListPage extends StatelessWidget {
                 SummonerTile(
                     summoner: Preferences.summoner,
                     level: Preferences.level,
-                    rank: Preferences.rank,
+                    rankedData: jsonDecode(Preferences.rankedData),
                     icon: iconImageURL),
                 Expanded(
                   child: ListView.builder(
@@ -55,6 +56,7 @@ class ChampionsListPage extends StatelessWidget {
                         description: champions[index]['title'],
                         mastery: champions[index]['mastery']['championLevel'].toString(),
                         chestGranted: champions[index]['chestGranted'],
+                        champion: champions[index]
                       );
                     },
                     itemCount: champions == null ? 0 : champions.length,

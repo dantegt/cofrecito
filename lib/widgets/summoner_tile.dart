@@ -5,15 +5,19 @@ import 'package:flutter/material.dart';
 
 class SummonerTile extends StatelessWidget {
   const SummonerTile(
-      {super.key, this.summoner, this.level, this.rank, this.icon});
+      {super.key, this.summoner, this.level, required this.rankedData, this.icon});
 
   final String? summoner;
   final int? level;
-  final String? rank;
+  final Map<String, dynamic> rankedData;
   final String? icon;
+
 
   @override
   Widget build(BuildContext context) {
+    var rank = rankedData['tier'];
+    var division = rankedData['rank'];
+
     return ListTile(
       tileColor: Theme.of(context).bottomAppBarColor,
       title: Text(
@@ -27,8 +31,8 @@ class SummonerTile extends StatelessWidget {
       )),
       trailing: Wrap(
         children: [
-          Image.network(
-            'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/05_platinum/05_platinum_division1.png',
+          CachedNetworkImage(
+            imageUrl: _rankIcon(rank, division),
             width: 70,
             height: 60,
           ),
@@ -52,4 +56,39 @@ _randomIcon() {
 
 _randomRank() {
   return Random().nextInt(500);
+}
+
+_rankIcon(rankLabel, divisionLabel) {
+  final ranks = {
+    'IRON': '01_iron',
+    'BRONZE': '02_bronze',
+    'SILVER': '03_silver',
+    'GOLD': '04_gold',
+    'PLATINUM': '05_platinum',
+    'DIAMOND': '06_diamond',
+    'MASTER': '07_master',
+    'GRANDMASTER': '08_grandmaster',
+    'CHALLENGER': '09_challenger',
+    'EMERALD': 'emerald',
+  };
+
+  final divisions = {
+    'I': 'division1',
+    'II': 'division2',
+    'III': 'division3',
+    'IV': 'division4',
+  };
+
+  var rank = ranks[rankLabel];
+  var division = divisions[divisionLabel];
+
+  if(rankLabel == 'EMERALD') {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/05_platinum/05_platinum_division1.png';
+  } else if(rankLabel == 'MASTER' || rankLabel == 'GRANDMASTER' || rankLabel == 'CHALLENGER') {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/$rank/$rank''_division1.png';
+  } else if(rankLabel == 'UNRANKED') {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/01_iron/01_iron_division4.png';
+  } else {
+    return 'https://raw.communitydragon.org/latest/game/assets/loadouts/regalia/crests/ranked/$rank/$rank''_$division.png';
+  }
 }
