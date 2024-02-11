@@ -22,6 +22,16 @@ Aplicación movil desarrollada en Flutter que busca conectarse con el [API de Ri
 - Provider / Theme Switch para cambiar el tema desde el menu
 - Organizacion de recursos: Assets, Barrel files, Routes, Themes
 
+## UPDATE - Entrega Final 2024
+- Agregada la pantalla de Vista de un Campeón, seleccionado de la lista
+- Todas las maestrias para cada campeón y la data de rankeo del invocador vienen desde [API Express JS - Lolcito](https://lolcito-express.onrender.com)
+- Las imagenes se cachean con CachedNetworkImageProvider() para no cargarlas cada vez
+- Se actualizaron los Shared Preferences para almacenar mas datos del usuario logueado
+- El menu se condiciono para mostrar las opciones de navegacion sólo si el usuario está logueado
+
+## Preview
+![cofrecito_demo_final](https://github.com/dantegt/cofrecito/assets/8105616/27e0ef71-f304-4603-b425-0541bb810d3a)
+
 ## Probado en:
 - Redmi Note 8 - API 28 - Android 9 Pie
 - Pixel 3A - API 33 - Android 13 Tiramisu (Emulador)
