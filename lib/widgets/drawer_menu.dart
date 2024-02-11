@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/providers.dart';
-import 'package:flutter_app/shared/preferences.dart';
+import 'package:cofrecito/providers/providers.dart';
+import 'package:cofrecito/shared/preferences.dart';
 import 'package:provider/provider.dart';
 
 class DrawerMenu extends StatefulWidget {

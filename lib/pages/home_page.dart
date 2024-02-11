@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/home_logged.dart';
-import 'package:flutter_app/shared/preferences.dart';
+import 'package:cofrecito/pages/home_logged.dart';
+import 'package:cofrecito/shared/preferences.dart';
 
 import '../widgets/widgets.dart';
 import '../shared/constants.dart';

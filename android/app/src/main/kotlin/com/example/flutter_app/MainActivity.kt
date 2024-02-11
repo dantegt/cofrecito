@@ -1,4 +1,4 @@
-package com.example.flutter_app
+package ar.com.kumo.cofrecito
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_app/shared/preferences.dart';
-import 'package:flutter_app/widgets/summoner_tile.dart';
+import 'package:cofrecito/shared/preferences.dart';
+import 'package:cofrecito/widgets/summoner_tile.dart';
 
 import '../widgets/widgets.dart';
 

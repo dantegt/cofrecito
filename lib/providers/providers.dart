@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/themes/default.dart';
+import 'package:cofrecito/themes/default.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeData currentTheme;

@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_app">
+    package="ar.com.kumo.cofrecito">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="flutter_app"
+        android:label="cofrecito"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

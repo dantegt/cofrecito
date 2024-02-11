@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/pages.dart';
-import 'package:flutter_app/providers/providers.dart';
-import 'package:flutter_app/shared/preferences.dart';
+import 'package:cofrecito/pages/pages.dart';
+import 'package:cofrecito/providers/providers.dart';
+import 'package:cofrecito/shared/preferences.dart';
 import 'package:provider/provider.dart';
 
 import './shared/constants.dart';
