@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         'home': (context) => const HomePage(),
         'champions': (context) => ChampionsListPage(),
         'home_logged': (context) => const HomeLogged(),
-        'support': (context) => MessageScreen()
+        'support': (context) => const MessageScreen()
       },
     );
   }

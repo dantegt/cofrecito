@@ -49,7 +49,7 @@ Widget build(BuildContext context) {
                 fontSize: 20,
                 fontWeight: FontWeight.normal,
                 fontFamily: 'Beaufort',
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
               )),
           Wrap(
             spacing: 10,

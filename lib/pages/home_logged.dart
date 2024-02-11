@@ -14,12 +14,12 @@ class HomeLogged extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    String _summoner = Preferences.summoner;
-    String _summonerPuuid = Preferences.summonerPuuid;
-    int _level = Preferences.level;
-    String _icon = Preferences.icon.toString();
-    String _rank = Preferences.rank;
-    String _iconImageURL = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/$_icon.jpg';
+    String summoner = Preferences.summoner;
+    String summonerPuuid = Preferences.summonerPuuid;
+    int level = Preferences.level;
+    String icon = Preferences.icon.toString();
+    String rank0 = Preferences.rank;
+    String iconImageURL = 'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/$icon.jpg';
 
     var rankedData = jsonDecode(Preferences.rankedData);
 
@@ -49,7 +49,7 @@ class HomeLogged extends StatelessWidget {
                   child: Stack(children: [
                     ClipOval(
                       child: FadeInImage(
-                        image: CachedNetworkImageProvider(_icon != '' ? _iconImageURL : Constants.fallbackIcon),
+                        image: CachedNetworkImageProvider(icon != '' ? iconImageURL : Constants.fallbackIcon),
                         placeholder: const AssetImage('assets/images/background.png'),
                         fit: BoxFit.fill,
                       ),
@@ -63,12 +63,12 @@ class HomeLogged extends StatelessWidget {
                           height: 25,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context).backgroundColor,
+                            color: Theme.of(context).colorScheme.background,
                           ),
                           child: Text(
-                            _level == 0
+                            level == 0
                                 ? '0'
-                                : _level.toString(),
+                                : level.toString(),
                             textAlign: TextAlign.center,
                           )),
                     ),
@@ -85,9 +85,9 @@ class HomeLogged extends StatelessWidget {
                           Container(
                             color: Colors.transparent,
                             child: Text(
-                              _summoner == ''
+                              summoner == ''
                                   ? 'Invocador'
-                                  : _summoner,
+                                  : summoner,
                               style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w800,
@@ -98,9 +98,9 @@ class HomeLogged extends StatelessWidget {
                           Container(
                             color: Colors.transparent,
                             child: Text(
-                              _rank == '' ?
+                              rank0 == '' ?
                               "UNRANKED"
-                              : _rank,
+                              : rank0,
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,

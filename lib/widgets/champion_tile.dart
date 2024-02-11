@@ -80,7 +80,7 @@ class ChampionTile extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.normal,
             fontFamily: 'Beaufort',
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).colorScheme.background,
           )),
     );
   }

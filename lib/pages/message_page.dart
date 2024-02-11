@@ -1,10 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/drawer_menu.dart';
 
 class MessageScreen extends StatefulWidget{
-  MessageScreen({super.key});
+  const MessageScreen({super.key});
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();
@@ -57,15 +56,15 @@ class _MessageScreenState extends State<MessageScreen> {
               width:370,
               height: 40,
             child: DropdownButton<String>(
-              style: TextStyle(color: Color.fromARGB(255, 217, 219, 209), fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(color: Color.fromARGB(255, 217, 219, 209), fontSize: 18, fontWeight: FontWeight.w500),
               value: dropdownvalue,
               icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(42, 66, 82, 20),),
               items: items.map((String items) {
                 return DropdownMenuItem(
                   value: items,
-                  child: Text(items, style: TextStyle(fontFamily: 'DMSans', color: items != '¿De que se trata su consulta?'
-                  ? Color.fromRGBO(174, 145, 75, 1) : Colors.black,)),
                   enabled: items != '¿De que se trata su consulta?',
+                  child: Text(items, style: TextStyle(fontFamily: 'DMSans', color: items != '¿De que se trata su consulta?'
+                  ? const Color.fromRGBO(174, 145, 75, 1) : Colors.black,)),
                 );
               }).toList(),
               onChanged: (String? newValue) {
@@ -89,8 +88,8 @@ class _MessageScreenState extends State<MessageScreen> {
                 ),
                 width: 370,
                 height: 270,
-                padding: EdgeInsets.only(top: 5,left: 10),
-                child:TextField(
+                padding: const EdgeInsets.only(top: 5,left: 10),
+                child:const TextField(
                   autofocus: false,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
@@ -100,11 +99,11 @@ class _MessageScreenState extends State<MessageScreen> {
                   cursorRadius: Radius.circular(200),
                   cursorWidth: 2.0,
                   textInputAction: TextInputAction.send,
-                  decoration: new InputDecoration.collapsed(hintText: 'Describe el paso a paso para\nreproducir el error.', hintStyle: TextStyle(fontFamily: 'DMSans',fontSize: 16, fontWeight: FontWeight.w400,color: Colors.black ))
+                  decoration: InputDecoration.collapsed(hintText: 'Describe el paso a paso para\nreproducir el error.', hintStyle: TextStyle(fontFamily: 'DMSans',fontSize: 16, fontWeight: FontWeight.w400,color: Colors.black ))
                   ),),
                 const Padding(padding: EdgeInsets.only(top: 240)),
                  Container(
-                  child: (CheckboxListTile(value: _listTileCheckBox, activeColor: Color.fromRGBO(174, 145, 75, 1), title: Text('Enviarme una copia a mi email', style: TextStyle(fontFamily: 'DMSans')), onChanged:(value) {
+                  child: (CheckboxListTile(value: _listTileCheckBox, activeColor: const Color.fromRGBO(174, 145, 75, 1), title: const Text('Enviarme una copia a mi email', style: TextStyle(fontFamily: 'DMSans')), onChanged:(value) {
                 setState(() {
                   _listTileCheckBox = value;
                 });
